@@ -1,0 +1,5 @@
+(require 'xah-fly-keys)
+(xah-fly-keys-set-layout "colemak")
+(xah-fly-keys 1)
+(global-set-key (kbd "RET") 'xah-fly-command-mode-activate)
+(global-set-key (kbd "<return>") 'xah-fly-command-mode-activate)
