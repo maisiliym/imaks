@@ -7,3 +7,5 @@
 (require 'which-key)
 (which-key-mode)
 (require 'helm-config)
+(add-to-list 'custom-theme-load-path "~/git/base16-emacs/build")
+(load-theme 'base16-google-light t)
