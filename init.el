@@ -1,6 +1,7 @@
 (electric-pair-mode 1)
 (menu-bar-mode -1)
 (load-theme 'tango t)
+(pinentry-start)
 
 (require 'which-key)
 (which-key-mode)
@@ -9,11 +10,7 @@
 (require 'helm-config)
 (helm-mode 1)
 (global-set-key (kbd "M-x") 'helm-M-x)
-(setq helm-mode-fuzzy-match t
-      helm-completion-in-region-fuzzy-match t
-      helm-M-x-fuzzy-match t
-      helm-completion-style 'emacs
-      completion-styles '(flex))
+(setq completion-styles '(flex))
 
 (require 'magit)
 
@@ -32,7 +29,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(safe-local-variable-values
-   '((eval let
+   '((eval modify-syntax-entry 43 "'")
+     (eval modify-syntax-entry 36 "'")
+     (eval modify-syntax-entry 126 "'")
+     (eval let
 	   ((root-dir-unexpanded
 	     (locate-dominating-file default-directory ".dir-locals.el")))
 	   (when root-dir-unexpanded
