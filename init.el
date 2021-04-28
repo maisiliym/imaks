@@ -2,7 +2,7 @@
 (load custom-file)
 (electric-pair-mode 1)
 (menu-bar-mode -1)
-(load-theme 'tango t)
+(load-theme 'leuven t)
 (pinentry-start)
 
 (require 'which-key)
@@ -15,6 +15,8 @@
 (setq completion-styles '(flex))
 
 (require 'magit)
+(global-diff-hl-mode)
+(diff-hl-margin-mode)
 
 (setq xah-fly-M-x-command 'helm-M-x)
 (require 'xah-fly-keys)
@@ -24,3 +26,5 @@
 (require 'projectile)
 (projectile-mode +1)
 (setq projectile-project-search-path '("~/git/"))
+(require 'helm-projectile)
+(helm-projectile-on)
