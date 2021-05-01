@@ -8,22 +8,31 @@
 (require 'which-key)
 (which-key-mode)
 
-;; (require 'helm)
-;; (require 'helm-config)
-;; (helm-mode 1)
-;; (global-set-key (kbd "M-x") 'helm-M-x)
-;; (setq completion-styles '(fuzzy))
-
 (selectrum-mode +1)
 (selectrum-prescient-mode +1)
 (prescient-persist-mode +1)
 (setq prescient-filter-method '(literal fuzzy))
 
+(marginalia-mode)
+
+;; (note 'noTerminalSupport)
+;; (require 'posframe)
+;; (setq selectrum-display-action '(display-buffer-show-in-posframe))
+;; (defun display-buffer-show-in-posframe (buffer _alist)
+;;   (frame-root-window
+;;    (posframe-show buffer
+;;                   :min-height 10
+;;                   :min-width (frame-width)
+;;                   :internal-border-width 1
+;;                   :left-fringe 8
+;;                   :right-fringe 8
+;;                   :poshandler 'posframe-poshandler-frame-bottom-left-corner)))
+;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
+
 (require 'magit)
 (global-diff-hl-mode)
 (diff-hl-margin-mode)
 
-;; (setq xah-fly-M-x-command 'prescient-sort)
 (require 'xah-fly-keys)
 (xah-fly-keys 1)
 (xah-fly-keys-set-layout "colemak")
@@ -31,36 +40,30 @@
 (require 'projectile)
 (projectile-mode +1)
 (setq projectile-project-search-path '("~/git/"))
-;; (require 'helm-projectile)
-;; (helm-projectile-on)
 
 (with-eval-after-load "esh-opt"
   (autoload 'epe-theme-lambda "eshell-prompt-extras")
   (setq eshell-highlight-prompt nil
         eshell-prompt-function 'epe-theme-lambda))
 
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (eshell-cmpl-initialize)
-            (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
-            (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)))
+;; (note 'switchToSelectrum)
+;; (add-hook 'eshell-mode-hook
+;;           (lambda ()
+;;             (eshell-cmpl-initialize)
+;;             (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
+;;             (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)))
 
-;; (require 'fish-completion)
-;; (global-fish-completion-mode)
+(require 'fish-completion)
+(global-fish-completion-mode)
 
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
 
-;; (note "doesnt work")
-;; (require 'adaptive-wrap)
-;; (adaptive-wrap-prefix-mode 1)
-;; (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
-
-;; (define-key xah-fly-key-map (kbd "<C-return>") 'newline-and-indent)
-;; (define-key xah-fly-key-map (kbd "C-RET") 'newline-and-indent)
-
 (defun my-xfk-addon-insert ()
   "Modify keys for xah fly key command mode keys To be added to `xah-fly-insert-mode-activate-hook'"
-  (interactive)
-  (define-key xah-fly-key-map (kbd "C-e") 'newline-and-indent))
+  (interactive))
 
 (add-hook 'xah-fly-insert-mode-activate-hook 'my-xfk-addon-insert)
+
+;; (note "doesnt work")
+;; (require 'adaptive-wrap)
+;; (adaptive-wrap-prefix-mode 1) 
