@@ -2,18 +2,31 @@
 (load custom-file)
 (electric-pair-mode 1)
 (menu-bar-mode -1)
-(load-theme 'tango t)
 (pinentry-start)
+
+(load-theme 'wombat t)
+(require 'doom-modeline)
+(doom-modeline-mode 1)
 
 (require 'which-key)
 (which-key-mode)
 
+(recentf-mode 1)
+(setq recentf-max-menu-items 256)
+(setq recentf-max-saved-items 256)
+
 (selectrum-mode +1)
 (selectrum-prescient-mode +1)
 (prescient-persist-mode +1)
-(setq prescient-filter-method '(literal fuzzy))
+(setq prescient-filter-method '(regexp fuzzy))
 
 (marginalia-mode)
+
+(require 'org-roam)
+(setq org-directory "~/git/wiki")
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-roam-directory org-directory)
+(add-hook 'after-init-hook 'org-roam-mode)
 
 ;; (note 'noTerminalSupport)
 ;; (require 'posframe)
@@ -33,13 +46,18 @@
 (global-diff-hl-mode)
 (diff-hl-margin-mode)
 
+(defun start-xah-fly-keys ()
+  (xah-fly-keys 1)
+  (xah-fly-keys-set-layout "colemak"))
+
 (require 'xah-fly-keys)
-(xah-fly-keys 1)
-(xah-fly-keys-set-layout "colemak")
+(if (daemonp)
+    (add-hook 'server-after-make-frame-hook 'start-xah-fly-keys)
+  (start-xah-fly-keys))
 
 (require 'projectile)
 (projectile-mode +1)
-(setq projectile-project-search-path '("~/git/"))
+(setq projectile-project-search-path '("~/git/" "/git/"))
 
 (with-eval-after-load "esh-opt"
   (autoload 'epe-theme-lambda "eshell-prompt-extras")
