@@ -1,13 +1,14 @@
 (setq custom-file "~/.config/emacs/custom-file.el")
 (load custom-file)
-(electric-pair-mode 1)
+(tool-bar-mode -1)
 (menu-bar-mode -1)
+(scroll-bar-mode -1)
+(electric-pair-mode 1)
 (pinentry-start)
 
 (load-theme 'wombat t)
 (require 'doom-modeline)
 (doom-modeline-mode 1)
-
 (require 'which-key)
 (which-key-mode)
 
@@ -44,7 +45,7 @@
 
 (require 'magit)
 (global-diff-hl-mode)
-(diff-hl-margin-mode)
+;; (diff-hl-margin-mode)
 
 (defun start-xah-fly-keys ()
   (xah-fly-keys 1)
