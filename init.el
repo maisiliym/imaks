@@ -1,12 +1,14 @@
+(setq lexical-binding t)
 (setq custom-file "~/.config/emacs/custom-file.el")
 (load custom-file)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
+
 (electric-pair-mode 1)
 (pinentry-start)
 
-(load-theme 'wombat t)
+(load-theme 'tango t)
 (require 'doom-modeline)
 (doom-modeline-mode 1)
 (require 'which-key)
@@ -19,9 +21,14 @@
 (selectrum-mode +1)
 (selectrum-prescient-mode +1)
 (prescient-persist-mode +1)
-(setq prescient-filter-method '(regexp fuzzy))
-
+(setq prescient-filter-method '(literal regexp fuzzy))
+(require 'orderless)
+(setq completion-styles '(orderless))
 (marginalia-mode)
+
+(with-eval-after-load 'geiser-guile
+  (add-to-list 'geiser-guile-load-path "~/.config/guix/current/share/guile/site/3.0"))
+(require 'geiser-guile)
 
 (require 'org-roam)
 (setq org-directory "~/git/wiki")
@@ -29,13 +36,12 @@
 (setq org-roam-directory org-directory)
 (add-hook 'after-init-hook 'org-roam-mode)
 
-;; (note 'noTerminalSupport)
 ;; (require 'posframe)
 ;; (setq selectrum-display-action '(display-buffer-show-in-posframe))
 ;; (defun display-buffer-show-in-posframe (buffer _alist)
 ;;   (frame-root-window
 ;;    (posframe-show buffer
-;;                   :min-height 10
+;;                   :min-height 20
 ;;                   :min-width (frame-width)
 ;;                   :internal-border-width 1
 ;;                   :left-fringe 8
