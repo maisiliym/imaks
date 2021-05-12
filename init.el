@@ -4,11 +4,29 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
+(delete-selection-mode 1)
+
+(defun start-xah-fly-keys ()
+  (xah-fly-keys 1)
+  (xah-fly-keys-set-layout "colemak"))
+
+(require 'xah-fly-keys)
+(if (daemonp)
+    (add-hook 'server-after-make-frame-hook 'start-xah-fly-keys)
+  (start-xah-fly-keys))
+
+(defun my-xfk-addon-insert ()
+  "Modify keys for xah fly key command mode keys To be added to `xah-fly-insert-mode-activate-hook'"
+  (interactive))
+
+(add-hook 'xah-fly-insert-mode-activate-hook 'my-xfk-addon-insert)
 
 (electric-pair-mode 1)
 (pinentry-start)
 
-(load-theme 'tango t)
+(load-theme 'modus-operandi t)
+(setq doom-themes-treemacs-theme "doom-colors")
+(doom-themes-treemacs-config)
 (require 'doom-modeline)
 (doom-modeline-mode 1)
 (require 'which-key)
@@ -25,10 +43,6 @@
 (require 'orderless)
 (setq completion-styles '(orderless))
 (marginalia-mode)
-
-(with-eval-after-load 'geiser-guile
-  (add-to-list 'geiser-guile-load-path "~/.config/guix/current/share/guile/site/3.0"))
-(require 'geiser-guile)
 
 (require 'org-roam)
 (setq org-directory "~/git/wiki")
@@ -50,17 +64,7 @@
 ;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
 
 (require 'magit)
-(global-diff-hl-mode)
-;; (diff-hl-margin-mode)
-
-(defun start-xah-fly-keys ()
-  (xah-fly-keys 1)
-  (xah-fly-keys-set-layout "colemak"))
-
-(require 'xah-fly-keys)
-(if (daemonp)
-    (add-hook 'server-after-make-frame-hook 'start-xah-fly-keys)
-  (start-xah-fly-keys))
+(git-gutter-mode)
 
 (require 'projectile)
 (projectile-mode +1)
@@ -71,24 +75,21 @@
   (setq eshell-highlight-prompt nil
         eshell-prompt-function 'epe-theme-lambda))
 
-;; (note 'switchToSelectrum)
-;; (add-hook 'eshell-mode-hook
-;;           (lambda ()
-;;             (eshell-cmpl-initialize)
-;;             (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
-;;             (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)))
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (eshell-cmpl-initialize)
+            (define-key eshell-mode-map (kbd "M-p") 'consult-history)))
+
 
 (require 'fish-completion)
 (global-fish-completion-mode)
 
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
 
-(defun my-xfk-addon-insert ()
-  "Modify keys for xah fly key command mode keys To be added to `xah-fly-insert-mode-activate-hook'"
-  (interactive))
+(require 'adaptive-wrap)
+(define-globalized-minor-mode global-adaptive-wrap adaptive-wrap-prefix-mode
+  (lambda () (adaptive-wrap-prefix-mode 1)))
+(global-adaptive-wrap 1)
 
-(add-hook 'xah-fly-insert-mode-activate-hook 'my-xfk-addon-insert)
-
-;; (note "doesnt work")
-;; (require 'adaptive-wrap)
-;; (adaptive-wrap-prefix-mode 1) 
+;; TODO
+;; (setq find-function-C-source-directory "~/Projects/emacs-25.1/src/") 
