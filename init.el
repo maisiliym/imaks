@@ -7,11 +7,15 @@
 (delete-selection-mode 1)
 
 (require 'xah-fly-keys)
+(defun xfk-mentci-modify ()
+  (define-key xah-fly-leader-key-map (kbd "t") 'consult-buffer)
+  (define-key xah-fly-key-map (kbd "k") 'consult-line)
+  )
+
 (defun start-xah-fly-keys ()
   (xah-fly-keys 1)
   (xah-fly-keys-set-layout "colemak")
-  (define-key xah-fly-leader-key-map (kbd "t") 'consult-buffer)
-  (define-key xah-fly-key-map (kbd "k") 'consult-line))
+  (xfk-mentci-modify))
 
 (defun my-config-xah-fly-key ()
   "Modify keys for xah fly key command mode keys
