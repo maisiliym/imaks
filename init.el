@@ -7,9 +7,63 @@
 (delete-selection-mode 1)
 
 (require 'xah-fly-keys)
+
 (defun xfk-mentci-modify ()
-  (define-key xah-fly-leader-key-map (kbd "t") 'consult-buffer)
   (define-key xah-fly-key-map (kbd "k") 'consult-line)
+
+  (xah-fly--define-keys
+   (define-prefix-command 'navigate-filesystem)
+   '(("h" . consult-buffer)
+     ("t" . projectile-find-file-dwim)
+     ("c" . projectile-switch-project)
+     ("n" . magit-find-file)
+     ("s" . find-file)
+     ))
+
+  ;; Innovation impossible without overriding everything
+  (xah-fly--define-keys
+   (define-prefix-command 'xah-fly-leader-key-map)
+   '(("SPC" . xah-fly-insert-mode-activate)
+     ("DEL" . xah-fly-insert-mode-activate)
+     ("RET" . xah-fly-M-x)
+     ("TAB" . xah-fly--tab-key-map)
+     ("." . xah-fly-dot-keymap)
+     ("'" . xah-fill-or-unfill)
+     ("," . xah-fly-comma-keymap)
+     ("-" . xah-show-formfeed-as-line)
+     ("\\" . toggle-input-method)
+     ("3" . delete-window)
+     ("4" . split-window-right)
+     ("5" . balance-windows)
+     ("6" . xah-upcase-sentence)
+     ("9" . ispell-word)
+     ("a" . mark-whole-buffer)
+     ("b" . end-of-buffer)
+     ("c" . xah-fly-c-keymap)
+     ("d" . beginning-of-buffer)
+     ("e" . xah-fly-e-keymap)
+     ("f" . xah-search-current-word)
+     ("g" . xah-close-current-buffer)
+     ("h" . xah-fly-h-keymap)
+     ("i" . kill-line)
+     ("j" . xah-copy-all-or-region)
+     ("k" . xah-paste-or-paste-previous)
+     ("l" . recenter-top-bottom)
+     ("m" . dired-jump)
+     ("n" . xah-fly-n-keymap)
+     ("o" . exchange-point-and-mark)
+     ("p" . query-replace)
+     ("q" . xah-cut-all-or-region)
+     ("r" . xah-fly-r-keymap)
+     ("s" . save-buffer)
+     ("t" . xah-fly-t-keymap)
+     ("u" . navigate-filesystem)
+     ;; v
+     ("w" . xah-fly-w-keymap)
+     ("x" . xah-toggle-previous-letter-case)
+     ("y" . xah-show-kill-ring)
+     ;; z
+     ))
   )
 
 (defun start-xah-fly-keys ()
@@ -17,18 +71,16 @@
   (xah-fly-keys-set-layout "colemak")
   (xfk-mentci-modify))
 
-(defun my-config-xah-fly-key ()
-  "Modify keys for xah fly key command mode keys
-To be added to `xah-fly-command-mode-activate-hook'"
-  (interactive))
+;; (defun my-config-xah-fly-key ()
+;;   "Modify keys for xah fly key command mode keys To be added to `xah-fly-command-mode-activate-hook'"
+;;   (interactive))
 
-(add-hook 'xah-fly-command-mode-activate-hook 'my-config-xah-fly-key)
+;; (defun my-xfk-addon-insert ()
+;;   "Modify keys for xah fly key command mode keys To be added to `xah-fly-insert-mode-activate-hook'"
+;;   (interactive))
 
-(defun my-xfk-addon-insert ()
-  "Modify keys for xah fly key command mode keys To be added to `xah-fly-insert-mode-activate-hook'"
-  (interactive))
-
-(add-hook 'xah-fly-insert-mode-activate-hook 'my-xfk-addon-insert)
+;; (add-hook 'xah-fly-command-mode-activate-hook 'my-config-xah-fly-key)
+;; (add-hook 'xah-fly-insert-mode-activate-hook 'my-xfk-addon-insert)
 
 (if (daemonp)
     (add-hook 'server-after-make-frame-hook 'start-xah-fly-keys)
