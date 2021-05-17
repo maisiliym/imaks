@@ -8,8 +8,62 @@
 
 (require 'xah-fly-keys)
 
+;; Innovation impossible without mass-overriding; most maps copied-over
 (defun xfk-mentci-modify ()
-  (define-key xah-fly-key-map (kbd "k") 'consult-line)
+  (xah-fly--define-keys
+   xah-fly-command-map
+   '(
+     ("~" . nil)
+     (":" . nil)
+     ("SPC" . xah-fly-leader-key-map)
+     ("DEL" . xah-fly-leader-key-map)
+     ("'" . xah-reformat-lines)
+     ("," . xah-shrink-whitespaces)
+     ("-" . xah-cycle-hyphen-underscore-space)
+     ("." . xah-backward-kill-word)
+     (";" . xah-comment-dwim)
+     ("/" . hippie-expand)
+     ("\\" . nil)
+     ;; ("=" . xah-forward-equal-sign)
+     ("[" . xah-backward-punct )
+     ("]" . xah-forward-punct)
+     ("`" . other-frame)
+     ("1" . xah-extend-selection)
+     ("2" . xah-select-line)
+     ("3" . delete-other-windows)
+     ("4" . split-window-below)
+     ("5" . delete-char)
+     ("6" . xah-select-block)
+     ("7" . xah-select-line)
+     ("8" . xah-extend-selection)
+     ("9" . xah-select-text-in-quote)
+     ("0" . xah-pop-local-mark-ring)
+     ("a" . xah-fly-M-x)
+     ("b" . consult-line)
+     ("c" . previous-line)
+     ("d" . xah-beginning-of-line-or-block)
+     ("e" . xah-delete-backward-char-or-bracket-text)
+     ("f" . undo)
+     ("g" . backward-word)
+     ("h" . backward-char)
+     ("i" . xah-delete-current-text-block)
+     ("j" . xah-copy-line-or-region)
+     ("k" . xah-paste-or-paste-previous)
+     ("l" . xah-insert-space-before)
+     ("m" . xah-backward-left-bracket)
+     ("n" . forward-char)
+     ("o" . open-line)
+     ("p" . xah-kill-word)
+     ("q" . xah-cut-line-or-region)
+     ("r" . forward-word)
+     ("s" . xah-end-of-line-or-block)
+     ("t" . next-line)
+     ("u" . xah-fly-insert-mode-activate)
+     ("v" . xah-forward-right-bracket)
+     ("w" . xah-next-window-or-frame)
+     ("x" . xah-toggle-letter-case)
+     ("y" . set-mark-command)
+     ("z" . xah-goto-matching-bracket)))
 
   (xah-fly--define-keys
    (define-prefix-command 'navigate-filesystem)
@@ -20,7 +74,6 @@
      ("s" . find-file)
      ))
 
-  ;; Innovation impossible without overriding everything
   (xah-fly--define-keys
    (define-prefix-command 'xah-fly-leader-key-map)
    '(("SPC" . xah-fly-insert-mode-activate)
@@ -49,7 +102,7 @@
      ("j" . xah-copy-all-or-region)
      ("k" . xah-paste-or-paste-previous)
      ("l" . recenter-top-bottom)
-     ("m" . dired-jump)
+     ("m" . treemacs)
      ("n" . xah-fly-n-keymap)
      ("o" . exchange-point-and-mark)
      ("p" . query-replace)
@@ -104,10 +157,15 @@
 (selectrum-mode +1)
 (selectrum-prescient-mode +1)
 (prescient-persist-mode +1)
-(setq prescient-filter-method '(literal regexp fuzzy))
+(setq selectrum-prescient-enable-filtering nil) ; orderless
+;; (setq prescient-filter-method '(literal regexp fuzzy))
+
 (require 'orderless)
 (setq completion-styles '(orderless))
+(setq orderless-skip-highlighting (lambda () selectrum-is-active))
+
 (marginalia-mode)
+(marginalia-cycle)
 
 (require 'org-roam)
 (setq org-directory "~/git/wiki")
