@@ -214,5 +214,10 @@
   (lambda () (adaptive-wrap-prefix-mode 1)))
 (global-adaptive-wrap 1)
 
+(setq geiser-guile-load-path
+      '("/data/li/git/guix"
+	"/data/li/git/giiks"
+	"/data/li/git/guix-home-manager"))
+
 ;; TODO
 ;; (setq find-function-C-source-directory "~/Projects/emacs-25.1/src/") 
