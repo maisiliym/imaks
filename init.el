@@ -219,5 +219,12 @@
 	"/data/li/git/giiks"
 	"/data/li/git/guix-home-manager"))
 
+;; (setq guix-load-path
+;;       '("/data/li/git/guix"))
+
+(advice-add 'slime-display-or-scroll-completions :around
+             (defun my--slime-completion-in-region (_ completions start end)
+               (completion-in-region start end completions)))
+
 ;; TODO
 ;; (setq find-function-C-source-directory "~/Projects/emacs-25.1/src/") 
