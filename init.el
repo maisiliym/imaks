@@ -151,12 +151,13 @@
 (which-key-mode)
 
 (recentf-mode 1)
-(setq recentf-max-menu-items 256)
-(setq recentf-max-saved-items 256)
+(setq recentf-max-menu-items 1024)
+(setq recentf-max-saved-items 1024)
 
 (selectrum-mode +1)
 (selectrum-prescient-mode +1)
 (prescient-persist-mode +1)
+(setq selectrum-max-window-height 20)
 (setq selectrum-prescient-enable-filtering nil) ; orderless
 ;; (setq prescient-filter-method '(literal regexp fuzzy))
 
@@ -208,6 +209,10 @@
 (global-fish-completion-mode)
 
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+(eval-after-load "lispy"
+  `(progn
+     ;; replace a local binding
+     (lispy-define-key lispy-mode-map "e" 'lispy-down)))
 
 (require 'adaptive-wrap)
 (define-globalized-minor-mode global-adaptive-wrap adaptive-wrap-prefix-mode
