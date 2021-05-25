@@ -142,6 +142,9 @@
 (electric-pair-mode 1)
 (pinentry-start)
 
+(require 'multiple-cursors)
+(setq mc/always-run-for-all t)
+
 (load-theme 'modus-operandi t)
 (setq doom-themes-treemacs-theme "doom-colors")
 (doom-themes-treemacs-config)
@@ -167,6 +170,9 @@
 
 (marginalia-mode)
 (marginalia-cycle)
+
+(require 'yasnippet)
+(yas-global-mode 1)
 
 (require 'org-roam)
 (setq org-directory "~/git/wiki")
