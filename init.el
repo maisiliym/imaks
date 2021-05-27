@@ -39,7 +39,7 @@
      ("9" . xah-select-text-in-quote)
      ("0" . xah-pop-local-mark-ring)
      ("a" . xah-fly-M-x)
-     ("b" . consult-line)
+     ("b" . swiper-isearch)
      ("c" . previous-line)
      ("d" . xah-beginning-of-line-or-block)
      ("e" . xah-delete-backward-char-or-bracket-text)
@@ -171,6 +171,8 @@
 (marginalia-mode)
 (marginalia-cycle)
 
+(company-mode 1)
+
 (require 'yasnippet)
 (yas-global-mode 1)
 
@@ -193,6 +195,8 @@
 ;;                   :poshandler 'posframe-poshandler-frame-bottom-left-corner)))
 ;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
 
+(with-eval-after-load 'magit
+  (require 'forge))
 (require 'magit)
 (global-git-gutter-mode)
 
@@ -225,6 +229,7 @@
   (lambda () (adaptive-wrap-prefix-mode 1)))
 (global-adaptive-wrap 1)
 
+(setq geiser-mode-start-repl-p t)
 (setq geiser-guile-load-path
       '("/data/li/git/guix"
 	"/data/li/git/giiks"
