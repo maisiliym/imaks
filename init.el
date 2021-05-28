@@ -5,6 +5,7 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (delete-selection-mode 1)
+(electric-pair-mode 1)
 
 (require 'xah-fly-keys)
 
@@ -139,13 +140,15 @@
     (add-hook 'server-after-make-frame-hook 'start-xah-fly-keys)
   (start-xah-fly-keys))
 
-(electric-pair-mode 1)
 (pinentry-start)
+(require 'auth-source-pass)
+(auth-source-pass-enable)
+(setq auth-sources '(password-store))
 
 (require 'multiple-cursors)
 (setq mc/always-run-for-all t)
 
-(load-theme 'modus-operandi t)
+(load-theme 'modus-vivendi t)
 (setq doom-themes-treemacs-theme "doom-colors")
 (doom-themes-treemacs-config)
 (require 'doom-modeline)
