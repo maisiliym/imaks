@@ -1,4 +1,3 @@
-(setq lexical-binding t)
 (setq custom-file "~/.config/emacs/custom-file.el")
 (load custom-file)
 (tool-bar-mode -1)
@@ -7,7 +6,11 @@
 (delete-selection-mode 1)
 (electric-pair-mode 1)
 
+(setq xah-fly-use-control-key nil)
 (require 'xah-fly-keys)
+
+(defun mentci-outline ()
+  (consult-imenu))
 
 ;; Innovation impossible without mass-overriding; most maps copied-over
 (defun xfk-mentci-modify ()
@@ -40,7 +43,7 @@
      ("9" . xah-select-text-in-quote)
      ("0" . xah-pop-local-mark-ring)
      ("a" . xah-fly-M-x)
-     ("b" . swiper-isearch)
+     ("b" . ctrlf-forward-regexp)
      ("c" . previous-line)
      ("d" . xah-beginning-of-line-or-block)
      ("e" . xah-delete-backward-char-or-bracket-text)
@@ -62,7 +65,7 @@
      ("u" . xah-fly-insert-mode-activate)
      ("v" . xah-forward-right-bracket)
      ("w" . xah-next-window-or-frame)
-     ("x" . xah-toggle-letter-case)
+     ("x" . consult-imenu)
      ("y" . set-mark-command)
      ("z" . xah-goto-matching-bracket)))
 
@@ -147,8 +150,9 @@
 
 (require 'multiple-cursors)
 (setq mc/always-run-for-all t)
+(require 'phi-search)
 
-(load-theme 'modus-vivendi t)
+(load-theme 'wombat t)
 (setq doom-themes-treemacs-theme "doom-colors")
 (doom-themes-treemacs-config)
 (require 'doom-modeline)
@@ -169,21 +173,10 @@
 
 (require 'orderless)
 (setq completion-styles '(orderless))
-(setq orderless-skip-highlighting (lambda () selectrum-is-active))
+;; (setq orderless-skip-highlighting (lambda () selectrum-is-active))
 
 (marginalia-mode)
 (marginalia-cycle)
-
-(company-mode 1)
-
-(require 'yasnippet)
-(yas-global-mode 1)
-
-(require 'org-roam)
-(setq org-directory "~/git/wiki")
-(setq org-default-notes-file (concat org-directory "/notes.org"))
-(setq org-roam-directory org-directory)
-(add-hook 'after-init-hook 'org-roam-mode)
 
 ;; (require 'posframe)
 ;; (setq selectrum-display-action '(display-buffer-show-in-posframe))
@@ -198,8 +191,18 @@
 ;;                   :poshandler 'posframe-poshandler-frame-bottom-left-corner)))
 ;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
 
-(with-eval-after-load 'magit
-  (require 'forge))
+(company-mode 1)
+
+(require 'yasnippet)
+(yas-global-mode 1)
+
+(require 'org-roam)
+(setq org-directory "~/git/wiki")
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-roam-directory org-directory)
+(add-hook 'after-init-hook 'org-roam-mode)
+
+(with-eval-after-load 'magit (require 'forge))
 (require 'magit)
 (global-git-gutter-mode)
 
@@ -234,9 +237,9 @@
 
 (setq geiser-mode-start-repl-p t)
 (setq geiser-guile-load-path
-      '("/data/li/git/guix"
-	"/data/li/git/giiks"
-	"/data/li/git/guix-home-manager"))
+      '("~/git/guix"
+	"~/git/giiks"
+	"~/git/guix-home-manager"))
 
 ;; (setq guix-load-path
 ;;       '("/data/li/git/guix"))
@@ -247,3 +250,5 @@
 
 ;; TODO
 ;; (setq find-function-C-source-directory "~/Projects/emacs-25.1/src/") 
+
+(set-face-attribute 'default nil :height 100)
