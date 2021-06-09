@@ -152,7 +152,7 @@
 (setq mc/always-run-for-all t)
 (require 'phi-search)
 
-(load-theme 'wombat t)
+(load-theme 'dichromacy t)
 (setq doom-themes-treemacs-theme "doom-colors")
 (doom-themes-treemacs-config)
 (require 'doom-modeline)
@@ -162,7 +162,7 @@
 
 (recentf-mode 1)
 (setq recentf-max-menu-items 1024)
-(setq recentf-max-saved-items 1024)
+(setq recentf-max-saved-items 10024)
 
 (selectrum-mode +1)
 (selectrum-prescient-mode +1)
@@ -173,7 +173,7 @@
 
 (require 'orderless)
 (setq completion-styles '(orderless))
-;; (setq orderless-skip-highlighting (lambda () selectrum-is-active))
+(setq orderless-skip-highlighting (lambda () selectrum-is-active))
 
 (marginalia-mode)
 (marginalia-cycle)
@@ -183,12 +183,12 @@
 ;; (defun display-buffer-show-in-posframe (buffer _alist)
 ;;   (frame-root-window
 ;;    (posframe-show buffer
-;;                   :min-height 20
+;;                   :min-height 12
 ;;                   :min-width (frame-width)
 ;;                   :internal-border-width 1
 ;;                   :left-fringe 8
 ;;                   :right-fringe 8
-;;                   :poshandler 'posframe-poshandler-frame-bottom-left-corner)))
+;;                   :poshandler 'posframe-poshandler-frame-center)))
 ;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
 
 (company-mode 1)
@@ -237,16 +237,17 @@
 
 (setq geiser-mode-start-repl-p t)
 (setq geiser-guile-load-path
-      '("~/git/guix"
-	"~/git/giiks"
-	"~/git/guix-home-manager"))
+      '("~/git/guix" "~/git/guix-home-manager"
+	"~/git/uniks" "~/git/maisiliym" "~/git/giiks"))
 
+;; (setq guix-directory
+;;       "/home/li/.config/guix/current/share/guile/site/3.0")
 ;; (setq guix-load-path
 ;;       '("/data/li/git/guix"))
 
 (advice-add 'slime-display-or-scroll-completions :around
-             (defun my--slime-completion-in-region (_ completions start end)
-               (completion-in-region start end completions)))
+            (defun my--slime-completion-in-region (_ completions start end)
+              (completion-in-region start end completions)))
 
 ;; TODO
 ;; (setq find-function-C-source-directory "~/Projects/emacs-25.1/src/") 
