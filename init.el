@@ -72,11 +72,20 @@
   (xah-fly--define-keys
    (define-prefix-command 'navigate-filesystem)
    '(("h" . consult-buffer)
-     ("t" . projectile-find-file-dwim)
+     ("t" . projectile-find-file)
      ("c" . projectile-switch-project)
      ("n" . magit-find-file)
      ("s" . find-file)
      ))
+
+  ;; (xah-fly--define-keys
+  ;;  (define-prefix-command 'version-control)
+  ;;  '(("h" . consult-buffer)
+  ;;    ("t" . projectile-find-file-dwim)
+  ;;    ("c" . projectile-switch-project)
+  ;;    ("n" . magit-find-file)
+  ;;    ("s" . find-file)
+  ;;    ))
 
   (xah-fly--define-keys
    (define-prefix-command 'xah-fly-leader-key-map)
@@ -106,7 +115,7 @@
      ("j" . xah-copy-all-or-region)
      ("k" . xah-paste-or-paste-previous)
      ("l" . recenter-top-bottom)
-     ("m" . treemacs)
+     ("m" . dired)
      ("n" . xah-fly-n-keymap)
      ("o" . exchange-point-and-mark)
      ("p" . query-replace)
@@ -153,8 +162,8 @@
 (require 'phi-search)
 
 (load-theme 'dichromacy t)
-(setq doom-themes-treemacs-theme "doom-colors")
-(doom-themes-treemacs-config)
+;; (setq doom-themes-treemacs-theme "doom-colors")
+;; (doom-themes-treemacs-config)
 (require 'doom-modeline)
 (doom-modeline-mode 1)
 (require 'which-key)
